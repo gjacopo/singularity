@@ -51,11 +51,11 @@ enabled.
 		exponent] [-memory] [-wav wav_index] [-der deriv_order] [-hold] [-s0 scale_0]
 		[-range scale_rng] [-Nbin #bins] [-Method ] [-LastWave] 
 
-GENERAL PARAMETERS
-==================
- -ver : Flag. If enabled, the program shows lots of (verbose) information,
+## General parameters
+
+ * `-ver` : Flag. If enabled, the program shows lots of (verbose) information,
 	specially for multifractal analysis. Default: DISABLED
- -fromDh : Flag. If enabled, the program takes previously computed D(h) files
+ * `-fromDh` : Flag. If enabled, the program takes previously computed D(h) files
 	and estimates the error from them.
 	Default: _DISABLED_
  -geomap : Flag. If enabled, the program tries to generate quality maps
