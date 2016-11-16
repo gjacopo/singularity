@@ -68,10 +68,10 @@ enabled.
  * `-dim` : Size of series to be processed. Default: 512
  * `-d_space` : Dimension of the embedding space. Default: 1
  * `-type` : Type of multifractal to be generated.
-   	0: Log-Poisson
-   	1: Log-Normal
-   	2: Log-Levi
-   	3: Binomial
+        + 0: Log-Poisson
+        + 1: Log-Normal
+        + 2: Log-Levi
+        + 3: Binomial
  	Default: 0
  * `-hinf` : Most singular exponent. Valid for log-Poisson and binomials. Default: -0.50
  * `-Codinf` : Most singular codimension. Valid for log-Poisson and binomials. Default: 1.00
@@ -87,10 +87,10 @@ cost of longer processing times). Default: _DISABLED_
 
 ### Wavelet variables
 * `-wav` : Wavelet to be used.
-   	0: Gaussian
-   	1: Lorentzian at exponent 0.5
-   	2: Lorentzian
-   	3: Lorentzian at 1.5.
+        + 0: Gaussian
+        + 1: Lorentzian at exponent 0.5
+        + 2: Lorentzian
+        + 3: Lorentzian at 1.5.
 	Default:  0 
 * `-der` : Derivative order for the wavelet. Default:  0
 * `-hold` : Flag. It enables function processing (in opposition to
@@ -104,7 +104,9 @@ cost of longer processing times). Default: _DISABLED_
 * `-LastWave` : Flag. If enabled, WTMM calculations are done by external calls to
  	LastWave. Default: _DISABLED_
 
-## Keyboard inputs
+## Inputs
+
+### Keyboard inputs
 
 First (and only) input: Path to the directory in which series are stored.
 
@@ -112,9 +114,9 @@ First (and only) input: Path to the directory in which series are stored.
 
 The program assumes that a collection of files with appropriate names will be
 placed at the given directory. Names and formats must correspond to those
-produced by the program `multifractal_generator``.
+produced by the program `multifractal_generator`.
 
-### Typical outputs
+## Outputs
 
 The four methods to evaluate the singularity spectrum can be invoked; each one
 has an associated alphanumerical chain (namely, `"Mom", "WTMM", "GMWP" and
@@ -128,7 +130,7 @@ name of the LastWave command in your system.
 
 In any working mode you will be provided the singularity spectrum files
 associated to the method used and the ensemble analyzed. The name of a
-spectrum file is of the form _Dh_<Method>_<Ensemble>_ where <Method>
+spectrum file is of the form _Dh_<Method>_<Ensemble>_ where _<Method>_
 designates the validation method and <Ensemble> defines all the
 characteristics of the analyzed ensemble. Spectrum files are four-column,
 ascii-formatted files. The columns mean, by order, `h`, `D(h)`, errorbar and
