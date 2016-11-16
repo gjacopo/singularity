@@ -1,40 +1,33 @@
-				Program:
-			+--------------------+
-	
-			Dh_evaluation
+Program: Dh_evaluation
 
+## Compiling command (using cc):
 
-			Compiling command (using cc):
-	+--------------------------------------------------------+
-
-cc -lm -I<path> -o Dh_evaluation.exe Dh_evaluation.c
+	gcc -lm -I<path> -o Dh_evaluation.exe Dh_evaluation.c
 
 where the chain "<path>" must be substituted by the path to reach
 the directory with the libraries required by this program.
 
+## Required libraries
 
-			    Required libraries:
-		+---------------------------------------------+
+	struct_def.c
+	operaciones.c
+	tensor.c
+	FFT.c
+	derivacion.c
+	multifractal.c
 
-struct_def.c
-operaciones.c
-tensor.c
-FFT.c
-derivacion.c
-multifractal.c
+## Run-time parameters 
 
-			      Run-time parameters 
-		+---------------------------------------------+
+You can get a brief description of the parameters by typing:
 
-You can get a brief description of the parameters by typing
-"Dh_evaluation -h". In the following you will see a more detailed
-description of this help.
+	Dh_evaluation -h
+In the following you will see a more detailed description of this help.
 
 There are three types of run-time variables: boolean, integer and floating 
 point. 
 
-Boolean variables can handle two states only, "ENABLED" or "DISABLED". By
-default, they are all "DISABLED"; they switch to the state "ENABLED" when the
+Boolean variables can handle two states only, _ENABLED_ or _DISABLED_. By
+default, they are all _DISABLED_; they switch to the state _ENABLED_ when the
 corresponding run-time parameter is specified; this parameter does not allow
 accompanying numerical factors.
 
@@ -44,7 +37,7 @@ default values, which can be known when the "-h" run-time parameter is passed.
 
 Besides, some variables are sons of boolean variables, that is, if a value
 is specified for one of these variables, automatically the state of the mother
-boolean variable becomes "ENABLED", even if it was not already specified. This
+boolean variable becomes _ENABLED_, even if it was not already specified. This
 is a convenient behaviour for some cases, in which the activation of a given
 processing mode opens the possibility of modifying some parameters specific to
 that mode; with this automatic enabling feature you can directly modify the
@@ -52,45 +45,41 @@ parameters specific for that mode and you do not need to explicitly enable it
 (what sometimes you can forget): once a son parameter is modified the mode is
 enabled. 
 
-
-
-Usage: Dh_evaluation [-ver] [-fromDh] [-geomap] [-typemap] [-N #series] 
-[-dim length] [-d_space dimension] [-type mult_type] [-hinf min_sing] [-Codinf
-min_sing_cod] [-h1 max_sing] [-mean sing_av] [-sigma disp_sing] [-alpha
-exponent] [-memory] [-wav wav_index] [-der deriv_order] [-hold] [-s0 scale_0]
-[-range scale_rng] [-Nbin #bins] [-Method ] [-LastWave] 
-
-
+	Usage: Dh_evaluation [-ver] [-fromDh] [-geomap] [-typemap] [-N #series] 
+		[-dim length] [-d_space dimension] [-type mult_type] [-hinf min_sing] [-Codinf
+		min_sing_cod] [-h1 max_sing] [-mean sing_av] [-sigma disp_sing] [-alpha
+		exponent] [-memory] [-wav wav_index] [-der deriv_order] [-hold] [-s0 scale_0]
+		[-range scale_rng] [-Nbin #bins] [-Method ] [-LastWave] 
 
 GENERAL PARAMETERS
 ==================
  -ver : Flag. If enabled, the program shows lots of (verbose) information,
-specially for multifractal analysis. Default: DISABLED
--fromDh : Flag. If enabled, the program takes previously computed D(h) files
-and estimates the error from them.
- Default: DISABLED
+	specially for multifractal analysis. Default: DISABLED
+ -fromDh : Flag. If enabled, the program takes previously computed D(h) files
+	and estimates the error from them.
+	Default: _DISABLED_
  -geomap : Flag. If enabled, the program tries to generate quality maps
-for each method, changing geometry but keeping the given MF type.
- Default: DISABLED
+	for each method, changing geometry but keeping the given MF type.
+ 	Default: _DISABLED_
  -typemap : Flag. If enabled, the program tries to generate quality maps
-for each method, for fixed geometry (1x16384) and changing parameters in
-the given MF type.
- Default: DISABLED
+	for each method, for fixed geometry (1x16384) and changing parameters in
+	the given MF type.
+ 	Default: _DISABLED_
  -N : Number of series to be processed. Default: 1
  -dim : Size of series to be processed. Default: 512
  -d_space : Dimension of the embedding space. Default: 1
  -type : Type of multifractal to be generated.
-   0: Log-Poisson
-   1: Log-Normal
-   2: Log-Levi
-   3: Binomial
- Default: 0
+   	0: Log-Poisson
+   	1: Log-Normal
+   	2: Log-Levi
+   	3: Binomial
+ 	Default: 0
  -hinf : Most singular exponent. Valid for log-Poisson and binomials. Default: -0.50
  -Codinf : Most singular codimension. Valid for log-Poisson and binomials. Default: 1.00
  -h1 : Maximum singularity in binomial MFs. Default: 0.50
  -mean : Singularity mean. Valid for log-Normal and log-Levi. Default: 0.50
  -sigma : Singularity dispersion. Valid for log-Normal and log-Levi.
-Default: 1.00
+	Default: 1.00
  -alpha : Valid for log-Levi only: log-Levi exponent. Default: 1.50
 
 MEMORY PARAMETERS
