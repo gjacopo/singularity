@@ -119,15 +119,15 @@ enabled.
 
 ### Derivative variables
 * `-dermode` : Integer variable. Method to compute derivatives
-        * 0: Half-pixel derivative kernel. It induces errors and non-local
+    + 0: Half-pixel derivative kernel. It induces errors and non-local
         effects. However this mode is chosen by default for compatibility with
         other programs using this library; this fact must be taken into account
         when running this program.
-        * 1: Direct one-pixel increment. This kernel coincides with the intuitive
+    + 1: Direct one-pixel increment. This kernel coincides with the intuitive
         definition of derivative on series, and does not induce errors nor
         non-local effects. This sould be the mode of choice for the present
         program.
-        * 2: Interpolation of derivatives. Noisy and experimental. Please ignore.
+    + 2: Interpolation of derivatives. Noisy and experimental. Please ignore.
 
     Default:0
 
