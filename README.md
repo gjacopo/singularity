@@ -14,45 +14,27 @@ you to reproduce the experiments of the article
 You need to create your own hierarchy of directories, as follows:
 
           EXP -------- benchmark ------ A
-                 |                 |
                  |                 |--- B
-                 |                 |
-                 |                 |--- C
-                 |          
+                 |                 |--- C   
                  |          
                  |---- wtmm ----------- A     
-                 |                 |
                  |                 |--- B
-                 |                 |
-                 |                 |--- C
-                 |          
+                 |                 |--- C        
                  |          
                  |---- lastwave ------- A
-                 |                 |
                  |                 |--- B
-                 |                 |
                  |                 |--- C
-                 |          
                  |          
                  |---- wavelab -------- A
-                 |                 |
                  |                 |--- B
-                 |                 |
                  |                 |--- C
-                 |                 |
                  |                 |--- wavelib
-                 |                 |
                  |                 |--- test
                  |          
-                 |          
                  |---- fraclab -------- A
-                                   |
                                    |--- B
-                                   |
                                    |--- C
-                                   |
                                    |--- fraclib
-                                   |
                                    |--- test
  
 Note that the name of the main directory (_EXP_ in the example above) 
