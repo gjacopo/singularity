@@ -1,22 +1,17 @@
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++                                             ++++++++++++
-+++++++++++           Multifractal experiments          ++++++++++++
-+++++++++++                                             ++++++++++++
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+Multifractal experiments
 
 In the following, we describe the code source files that will enable 
 you to reproduce the experiments of the article
 
 "Numerical methods for the estimation of singularity spectra on sampled 
 data: a comparative study"
+
 Turiel A., Pérez-Vicente C.J., and Grazzini, J.
 Journal of Computational Physics, 216(1):362-390, 2006.
+
 DOI: 10.1016/j.jcp.2005.12.004
+
 URL: http://www.sciencedirect.com/science/article/pii/S0021999105005565
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 
 You need to create your own hierarchy of directories, as 
 follows:
@@ -64,11 +59,8 @@ follows:
                                    |
                                    |--- test
  
-
-
 Note that the name of the main directory (EXP in the example above) 
 doesn't matter whereas the others do.
-
 
 benchmark
 ---------
@@ -83,8 +75,6 @@ them in the corresponding sub-directories A/, B/ and C/ once
 multifractal_generator has been copied in bin/.
 (note : in this file, change the name multifractal_generator.exe
 into multifractal_generator)
-
-
 
 wtmm
 ----
@@ -102,8 +92,6 @@ been copied in bin/.
 into wtmm_processor, ii/ then read carefully the first lines of 
 comments to have info about the processing, iii/ the program needs 
 approx. 20 mn to run with our data)
-
-
 
 lastwave
 --------
@@ -128,8 +116,6 @@ command:
 		10 1.5 8. 10. 'g2' {-200} -200 -200 
 See the help of function AnalyzeSeriesLastWTMM and the code for a 
 complete description.
-
-
 
 wavelab
 -------
@@ -166,8 +152,6 @@ Legendre transform (not the canonical one, like in lastwave).
 You can have a look in the test file, whose purpose is to use different 
 implementations (but all using the main WaveLab functions) for 
 retrieving similar results.
-
-
 
 fraclab
 -------
@@ -207,7 +191,3 @@ sub-directory test/ and to perform the operations described therein.
 The aim of the described operations is to help you to understand how
 FracLab works, to see the results it provides and eventually see some 
 of its limitations (not the canonical one, like in lastwave).
-
-
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
