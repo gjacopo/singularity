@@ -53,7 +53,6 @@ enabled.
         [-wv_basis choice] [-der_wv_basis order] [-Nbin #bins]
 
 ### General parameters
-
 * `-ver` : Boolean variable. When enabled, the program dumps more verbose
     information on standard output. Also, it produces printable representations
     of each generated series. WARNING: you can fast overcrow your hard disk.
@@ -73,10 +72,11 @@ enabled.
     scale invariance in the derivative or the wavelets-on-measures methods. 
 * ` -d_space` : Integer variable. Dimension of the generated signals. Default: 1
 * `-type` : Integer variable. Type of multifractal to be generated.
-        + 0: Log-Poisson
-        + 1: Log-Normal
-        + 2: Log-Levi
-        + 3: Binomial
+    + 0: Log-Poisson
+    + 1: Log-Normal
+    + 2: Log-Levi
+    + 3: Binomial
+
     Default:0
 * `-hinf` : Float variable. Minimum singularity in log-Poisson MFs and binomial MFs. 
     Default: -0.5
@@ -133,10 +133,11 @@ enabled.
 
 ### Wavelet variables (used for compute singularity exponents)
 * `-wav` : Integer variable. Wavelet to be used. 
-        + 0: Gaussian 
-        + 1: Lorentzian at exponent 0.5
-        + 2: Lorentzian
-        + 3: Lorentzian at exponent 1.5.
+    + 0: Gaussian 
+    + 1: Lorentzian at exponent 0.5
+    + 2: Lorentzian
+    + 3: Lorentzian at exponent 1.5.
+    
     (Recall that the slow the wavelet decays at infinity, the narrowest is the
     range of detected singularities but the best you can detect the MSM).
     Default:  0
@@ -149,9 +150,10 @@ enabled.
 
 ### Parameters defining the representation basis
 * `-wv_basis` : Integer variable. Wavelet of choice for the basis.
-        + 0: Gaussian wavelet
-        + 1: Lorentzian wavelet
-        + 2: Diagonal Haar
+    + 0: Gaussian wavelet
+    + 1: Lorentzian wavelet
+    + 2: Diagonal Haar
+    
     Default: 0
 * `-der_wv_basis` : Integer variable. It indicates how many derivatives must be
     applied to the basiswavelet. Default: 2. Recall that this value must be

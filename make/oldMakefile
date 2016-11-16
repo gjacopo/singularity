@@ -1,0 +1,149 @@
+RM = rm -f
+MV=mv
+CC = gcc 
+LINKER = gcc
+AR= ar 
+ARFLAGS = r
+RANLIB = ranlib
+
+OBJEXT     = o
+SRCEXT = c
+HDREXT     = h
+LIBEXT     = a
+SHAREDEXT  = so
+
+
+# Install directory
+DIRINST = $(HOME)/local
+
+## Variables for location
+REL=..
+CUR=.
+
+# List of source files to compile
+# In each papckage directory, the FILELIST file gives the list
+# of files that need to be compiled.
+FILELIST=FileList
+DIR=$(CUR)
+
+# Location of the sources
+include $(CUR)/$(FILELIST)
+# provides the variables 
+
+# Where some inputs/outputs are stored
+NAMEBIN=bin
+# ifdef VERS
+# NAMEINC=include-$(VERS)
+# else
+NAMEINC=include
+# endif
+NAMELIB=lib
+
+BINDIR=$(REL)/$(NAMEBIN)
+INCDIR=$(REL)/$(NAMEINC)
+LIBDIR=$(REL)/$(NAMELIB)
+
+# standard
+LIBUSR = /usr/local/lib/
+INCUSR = /usr/local/include
+
+INCLUDE= -I$(CUR) -I$(INCUSR) -I$(INCDIR)
+# -I$(INCDIR2) 
+CFLAGS = -O2 -g $(INCLUDE) 
+# -DDEBUG
+
+# External inrimage library
+ifeq ($(FLAG_INRIMAGE),TRUE)
+INRNAME = inrimage
+INCINR = $(DIRINST)/include/inrimage/
+LIBINRDIR = $(DIRINST)/lib/$(INRNAME)
+LIBINR = lib$(INRNAME)$(EXT)
+LFLAGINR = -l$(INRNAME)
+endif
+
+## Main variables, definitions and rules for the Makefile
+
+ifdef VERS
+# library to compile
+LIBRARY = lib$(NAME)-$(VERS).$(LIBEXT)
+# flag for this library in case a testing program is present
+LIBFLAG = -L$(CUR) -l$(NAME)-$(VERS)
+else
+LIBRARY = lib$(NAME).$(LIBEXT)
+LIBFLAG = -L$(CUR) -l$(NAME)
+endif
+
+# Update some variables
+
+ifeq ($(FLAG_INRIMAGE),TRUE)
+INCLUDE:= $(INCLUDE) -I$(INCINR) 
+CC := $(CC) -DFLAG_INRIMAGE
+LINKER := $(LINKER) -DFLAG_INRIMAGE
+LIBS := $(LIBS) -L$(LIBINRDIR) $(LFLAGINR)
+endif
+
+# Flags for linker with this library
+LDFLAGS = $(LIBFLAG) $(LIBS) -lm
+
+
+# Librairie a compiler
+
+all:: $(LIBRARY) $(PROGRAM)
+lib: $(NAME)
+prog: $(PROGRAM)
+
+.c.o:;$(CC) $(CFLAGS) -c $*.c -o $*.o
+
+
+$(NAME):$(LIBRARY)
+$(LIBRARY): $(OBJS) 
+# 	@for f in $(LIST); do \
+# 	if [ -e $$f.$(SRCEXT) ]; then \
+# 		echo $(CC) $(CFLAGS) -c $$f.$(SRCEXT) -o $$f.$(OBJEXT); \
+# 		$(CC) $(CFLAGS) -c $$f.$(SRCEXT) -o $$f.$(OBJEXT); \
+# 	fi; \
+# 	done
+	@if [ -n "$(LIBRARY)" ]; then \
+		$(AR) $(ARFLAGS) $@ $(OBJS); \
+		$(RANLIB) $@; \
+	fi
+
+$(PROGRAM): $(LIBRARY) $(MAINOBJ) 
+	@if [ -n "$(PROGRAM)" ]; then \
+		$(RM) $@; \
+		$(LINKER) $(CFLAGS) $(MAINOBJ) -o $@  $(LDFLAGS); \
+	fi
+
+install-lib: cleanall $(LIBRARY)
+	@if [ -e $(LIBDIR)/$(LIBRARY) ]; then \
+		$(RM) $(LIBDIR)/$(LIBRARY); \
+	fi
+	$(MV) $(LIBRARY) $(LIBDIR)
+
+install-prog: $(PROGRAM)
+	@if [ -n "$(PROGRAM)" ]; then \
+		if [ -e $(BINDIR)/$(PROGRAM) ]; then \
+			$(RM) $(BINDIR)/$(PROGRAM); \
+		fi; \
+	$(MV) $(PROGRAM) $(BINDIR); \
+	fi
+
+install: install-lib install-prog
+
+# Help for the Makefile
+help:
+	@echo "Main flags for the make command"
+	@if [ -n "$(PROGRAM)" ]; then \
+		echo "   - make prog : create program" $(PROGRAM); \
+	fi
+	@if [ -n "$(LIBRARY)" ]; then \
+		echo "   - make lib : create library" $(LIBRARY); \
+	fi
+	@echo "   - make clean : clean object files"
+	@echo "   - make cleanall : clean objects, libraries and programs"
+
+clean:
+	$(RM) *.o *~ $(LIBRARY) $(PROGRAM) 
+
+cleanall:
+	$(RM) *.o *~ $(LIBDIR)/$(LIBRARY) 

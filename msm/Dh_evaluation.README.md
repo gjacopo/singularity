@@ -68,10 +68,11 @@ enabled.
  * `-dim` : Size of series to be processed. Default: 512
  * `-d_space` : Dimension of the embedding space. Default: 1
  * `-type` : Type of multifractal to be generated.
-        + 0: Log-Poisson
-        + 1: Log-Normal
-        + 2: Log-Levi
-        + 3: Binomial
+    + 0: Log-Poisson
+    + 1: Log-Normal
+    + 2: Log-Levi
+    + 3: Binomial
+
  	Default: 0
  * `-hinf` : Most singular exponent. Valid for log-Poisson and binomials. Default: -0.50
  * `-Codinf` : Most singular codimension. Valid for log-Poisson and binomials. Default: 1.00
@@ -87,10 +88,11 @@ cost of longer processing times). Default: _DISABLED_
 
 ### Wavelet variables
 * `-wav` : Wavelet to be used.
-        + 0: Gaussian
-        + 1: Lorentzian at exponent 0.5
-        + 2: Lorentzian
-        + 3: Lorentzian at 1.5.
+    + 0: Gaussian
+    + 1: Lorentzian at exponent 0.5
+    + 2: Lorentzian
+    + 3: Lorentzian at 1.5.
+
 	Default:  0 
 * `-der` : Derivative order for the wavelet. Default:  0
 * `-hold` : Flag. It enables function processing (in opposition to
