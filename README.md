@@ -1,17 +1,15 @@
 Multifractal experiments
+========================
 
 In the following, we describe the code source files that will enable 
 you to reproduce the experiments of the article
 
-"Numerical methods for the estimation of singularity spectra on sampled 
-data: a comparative study"
-
-Turiel A., Pérez-Vicente C.J., and Grazzini, J.
-Journal of Computational Physics, 216(1):362-390, 2006.
-
-DOI: 10.1016/j.jcp.2005.12.004
-
-URL: http://www.sciencedirect.com/science/article/pii/S0021999105005565
+ "Numerical methods for the estimation of singularity spectra on sampled 
+ data: a comparative study",
+ Turiel A., Pérez-Vicente C.J., and Grazzini, J.
+ Journal of Computational Physics, 216(1):362-390, 2006.
+ DOI: 10.1016/j.jcp.2005.12.004
+ URL: http://www.sciencedirect.com/science/article/pii/S0021999105005565
 
 You need to create your own hierarchy of directories, as 
 follows:
