@@ -1,8 +1,5 @@
-# multifractal
+# multifractal - Multifractal experiments
 Tools for multifractal analysis of 1D (time-series) and 2D (images) signals
-
-Multifractal experiments
-========================
 
 In the following, we describe the code source files that will enable 
 you to reproduce the experiments of the article
