@@ -37,25 +37,23 @@ You need to create your own hierarchy of directories, as follows:
 Note that the name of the main directory (_EXP_ in the example above) 
 doesn't matter whereas the others do.
 
-benchmark
----------
+## benchmark
 
-The directory _benchmark/_ will contain all the data used in the various
+The directory `benchmark/` will contain all the data used in the various
 experiments. 
 
 In this directory, there is a script:
 
 	buildbench.sh 
 that enables to generate all the multifractal signals and to install 
-them in the corresponding sub-directories _A/, B/ and C/_ once 
-_multifractal_generator_ has been copied in _bin/_.
-(note : in this file, change the name _multifractal_generator.exe_
-into _multifractal_generator_)
+them in the corresponding sub-directories `A/`, `B/` and `C/` once 
+`multifractal_generator` has been copied in `bin/`.
+(note : in this file, change the name `multifractal_generator.exe`
+into `multifractal_generator`).
 
-wtmm
-----
+## wtmm
 
-The directory _wtmm/_ will contain all the results of the WTMM analysis 
+The directory `wtmm/` will contain all the results of the WTMM analysis 
 with our code.
 
 In this directory, there is a script:
@@ -63,22 +61,21 @@ In this directory, there is a script:
 	procwtmm.sh
 that enables to compute the singularity spectra of the signals in 
 benchmark and to install the results of these estimations in the 
-corresponding sub-directories _A/, B/ and C/_ once _wtmm_processor_ has 
-been copied in bin/.
-(note : in _procwtmm.sh_ 
-   i/ first change the name _wtmm_processor.exe_ into _wtmm_processor_, 
+corresponding sub-directories `A/`, `B/` and `C/` once `wtmm_processor` has 
+been copied in `bin/`.
+(note : in `procwtmm.sh`, 
+   i/ first change the name `wtmm_processor.exe` into `wtmm_processor`, 
    ii/ then read carefully the first lines of comments to have info about the processing, 
   iii/ the program needs approx. 20 mn to run with our data)
 
-lastwave
---------
+## lastwave
 
-The directory _lastwave/_ stores the main program for analyzing the 
-signals with the WTMM method implemented in the LastWave software.
+The directory `lastwave/` stores the main program for analyzing the 
+signals with the WTMM method implemented in the _LastWave_ software.
 
-In this directory, the file analysisLastWTMM1d.def contains the 
+In this directory, the file `analysisLastWTMM1d.def` contains the 
 routines to process the analysis. To use the functions defined in 
-this file, launch the software LastWave and type:
+this file, launch the software _LastWave_ and type:
 
  	a> source analysisLastWTMM1d.def
 ("a>" is the prompt of lastwave). With the command:
@@ -88,30 +85,28 @@ you will have some information about the main function used to
 analyze our data.
 
 If you want to analyze for instance the 10 signals Log-Poisson of 
-size 4096 and with parameters h_infty=-0.5 and D_\infty=0, type the 
+size 4096 and with parameters `h_infty=-0.5` and `D_\infty=0`, type the 
 command:
 
-	a> AnalyzeSeriesLastWTMM '../benchmark/B' 'B' \
-		'Log-Poisson.h-0.50-coD1.00_1D' \
+	a> AnalyzeSeriesLastWTMM '../benchmark/B' 'B' 'Log-Poisson.h-0.50-coD1.00_1D' \
 		10 1.5 8. 10. 'g2' {-200} -200 -200 
-See the help of function _AnalyzeSeriesLastWTMM_ and the code for a 
+See the help of function `AnalyzeSeriesLastWTMM` and the code for a 
 complete description.
 
-wavelab
--------
+## wavelab
 
-The directory _wavelab/_ contains the main program for analyzing the
-signals with the WTMM method implemented in the WaveLab802 software.
+The directory `wavelab/` contains the main program for analyzing the
+signals with the WTMM method implemented in the _WaveLab802_ software.
 
-  1. either you install the library WaveLab in your environment; then, 
-  you  add the path of the directory WaveLab to the PATH variable of 
-  Matlab, e.g. thanks to the command addpath (See the help of function 
-  _procWaveWTMM1d_, below).
+  1. either you install the library _WaveLab_ in your environment; then, 
+  you  add the path of the directory _WaveLab_ to the `PATH` variable of 
+  _Matlab_, _e.g._ thanks to the command addpath (See the help of function 
+  `procWaveWTMM1d`, below).
   2. you use the 'stand-alone' files provided in the sub-directory
-  _wavelib/_ of the directory wavelab/. They are copies of the wavelab  
+  `wavelib/` of the directory `wavelab/`. They are copies of the _Wavelab_  
   necessary files. 
 
-In Matlab, move to the directory _wavelab/_. Then, in order to perform 
+In _Matlab_, move to the directory `wavelab/`. Then, in order to perform 
 the estimation for all the series, you should type:
 
 	> procWaveWTMM1d('all','all');
@@ -122,62 +117,61 @@ type for example:
 
 	> procWaveWTMM1d('A',1);
 to perform the analysis only for the multifractal serie stored in file 
-_Log-Poisson.h-0.50-coD1.00_1D-N000.txt_ of set A. For more details, get 
-the help of function _procWaveWTMM1d_ by typing:
+`Log-Poisson.h-0.50-coD1.00_1D-N000.txt` of set `A`. For more details, get 
+the help of function `procWaveWTMM1d` by typing:
 
 	> help procWaveWTMM1d
 The function performing the main computation is stored in the file 
-_myAnalyzeSeriesWaveWTMM_; type
+`myAnalyzeSeriesWaveWTMM`; type
 
 	> help myAnalyzeSeriesWaveWTMM
 for help and have a look on the code inside this file.
 Note that this method uses only the classical method to compute the 
-Legendre transform (not the canonical one, like in lastwave).
+Legendre transform (not the canonical one, like in _Lastwave_).
 
 You can have a look in the test file, whose purpose is to use different 
-implementations (but all using the main WaveLab functions) for 
+implementations (but all using the main _WaveLab_ functions) for 
 retrieving similar results.
 
-fraclab
--------
+## fraclab
 
-The directory _fraclab/_ contains the main program for analyzing the 
-signals with the WTMM method implemented in the FracLab software.
+The directory `fraclab/` contains the main program for analyzing the 
+signals with the WTMM method implemented in the _FracLab_ software.
 
 First of all, you should be sure that the fraclab functions are known 
-in the Matlab environment. For this purpose, you have two solutions:
+in the _Matlab_ environment. For this purpose, you have two solutions:
 
-  1. either you install the library FracLab in your environment; then, 
-  you need to add the path of the directory FracLab to the PATH variable 
-  of Matlab, e.g. thanks to the command addpath (See the help of function 
-  _procFracWTMM1d_, below).
+  1. either you install the library _FracLab_ in your environment; then, 
+  you need to add the path of the directory _FracLab_ to the `PATH` variable 
+  of _Matlab_, _e.g._ thanks to the command addpath (See the help of function 
+  `procFracWTMM1d`, below).
   2. you use the 'stand-alone' files provided in the sub-directory 
-  _fraclib/_ of the directory _fraclab/_. 
+  `fraclib/` of the directory `fraclab/`. 
 
-In Matlab, move to the directory _fraclab/_. Then, in order to perform 
-the estimation for all the series, you should type:
+In _Matlab_, move to the directory `fraclab/`. Then, in order to perform 
+the estimation for all the series, you should type: 
 
 	> procFracWTMM1d('all','all');
-The processing of all the series takes about 25mn. 
+The processing of all the series takes about 25mn.  
 However, you may want to try first over small dataset to begin, so type 
 for example:
 
-	> procFracWTMM1d('A',1);
-to perform the analysis only for the multifractal stored in file 
-_Log-Poisson.h-0.50-coD1.00_1D-N000.txt_ of set A. For more details, get 
-the help of function _procFracWTMM1d_ by typing:
+	> procFracWTMM1d('A',1); 
+to perform the analysis only for the multifractal stored in file  
+`Log-Poisson.h-0.50-coD1.00_1D-N000.txt` of set A. For more details, get 
+the help of function `procFracWTMM1d` by typing:
 
 	> help procFracWTMM1d
 The function performing the main computation is stored in the file 
-_myAnalyzeSeriesFracWTMM_; type
+`myAnalyzeSeriesFracWTMM`; type
 
 	> help myAnalyzeSeriesFracWTMM
 for help and have a look on the code.
 Note that this method uses only the classical method to compute the 
 Legendre transform.
 
-We however recommand first to have a look on the _README_ of the 
-sub-directory _test/_ and to perform the operations described therein. 
+We however recommand first to have a look on the `README` of the 
+sub-directory `test/` and to perform the operations described therein. 
 The aim of the described operations is to help you to understand how
-FracLab works, to see the results it provides and eventually see some 
+_FracLab_ works, to see the results it provides and eventually see some 
 of its limitations (not the canonical one, like in lastwave).

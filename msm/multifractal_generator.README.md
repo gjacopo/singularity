@@ -1,4 +1,4 @@
-Program: multifractal_generator
+Program: `multifractal_generator`
 
 ## Compiling command (using cc):
 
@@ -20,7 +20,7 @@ the directory with the libraries required by this program.
 ## Run-time parameters 
 
 You can get a brief description of the parameters by typing
-"multifractal_generator.exe -h". In the following you will see a more detailed
+`multifractal_generator.exe -h`. In the following you will see a more detailed
 description of this help.
 
 There are three types of run-time variables: boolean, integer and floating 
@@ -83,7 +83,7 @@ enabled.
 * `-Codinf` : Float variable. Most singular codimension. Valid for log-Poissons and binomials. 
     Default: 1.00
 * `-h1` : Maximum singularity in binomial MFs. Default: 0.50
-* `-mean` : Float variable. Value for the singularity mean (i.e., maximum
+* `-mean` : Float variable. Value for the singularity mean (_i.e._, maximum
     dimensionality). This parameter only affects the generation of log-Normal and
     log-Levi signals. Default: 0.50
 * `-sigma` : Float variable. Singularity dispersion. It is valid for log-Normal

@@ -1,4 +1,4 @@
-Program: Dh_evaluation
+Program: `Dh_evaluation`
 
 ## Compiling command (using cc):
 
@@ -126,7 +126,7 @@ run-time parameter `-Method`. In the present version, the program incorporates a
 built-in version of WTMM. You can change this however to a call to an external
 instalation of _LastWave_; in such a case, you should specify `-LastWave` as a
 run-time flag. You may need to modify `LWCALL` in line 84 to accomodate to the 
-name of the LastWave command in your system.
+name of the _LastWave_ command in your system.
 
 In any working mode you will be provided the singularity spectrum files
 associated to the method used and the ensemble analyzed. The name of a
@@ -137,23 +137,23 @@ ascii-formatted files. The columns mean, by order, `h`, `D(h)`, errorbar and
 theoretical `D(h)`. For methods which do not allow to evaluate errobars, the
 third column is conventionally fixed to 0.2.
 
-We will represent by "$$$" the general basename associated to the output
+We will represent by `$$$` the general basename associated to the output
 files. It consists of the name identifying the type of multifractal
 ("Log-Poisson", "Log-Normal" and "Log-Levi", in the present version), plus the
 tags and values for the associated free parameters, and a final tag specifying
 if the data are onedimensional (1D) or bidimensional (2D).
 
-Modes `-geomap` and `-typemap` have an special effect. When you activate -geomap
+Modes `-geomap` and `-typemap` have an special effect. When you activate `-geomap`
 you are suppose to evaluate a benchmark of ensembles, according to the
-geometry defined by the Size Benchmark in the paper. The flag -typemap
+geometry defined by the Size Benchmark in the paper. The flag `-typemap`
 evaluates spectra according to the prescription of Spectrum Benchmark of the
 log-Poisson or the log-Normal types (no other are given so far). So, within
 these two modes, in addition to the spectra for each ensemble in the benchmark
 you will obtain files `GeoMap-$$$` and `TypeMap-$$$` with the estimation errors
 for each element in the benchmark. The files are formatted in ascii.
 
-Mode `-fromDh` has been introduced to ease calculations of GeoMaps and
-TypeMaps. If you have already calculated the spectra and the files are in the
+Mode `-fromDh` has been introduced to ease calculations of `GeoMaps` and
+`TypeMaps`. If you have already calculated the spectra and the files are in the
 same directory, the flag `-fromDh` will process these files and obtain the maps
-of errors from them. This allows fast re-calculations, and may be very
-convenient to avoid re-starting the process if the program hungs.
+of errors from them. This allows fast re-calculations, and may be very 
+convenient to avoid re-starting the process if the program hungs. 
