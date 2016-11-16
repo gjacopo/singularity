@@ -124,11 +124,11 @@ wavelab
 The directory _wavelab/_ contains the main program for analyzing the
 signals with the WTMM method implemented in the WaveLab802 software.
 
-  i) either you install the library WaveLab in your environment; then, 
+  1. either you install the library WaveLab in your environment; then, 
   you  add the path of the directory WaveLab to the PATH variable of 
   Matlab, e.g. thanks to the command addpath (See the help of function 
   _procWaveWTMM1d_, below).
-  ii) you use the 'stand-alone' files provided in the sub-directory
+  2. you use the 'stand-alone' files provided in the sub-directory
   _wavelib/_ of the directory wavelab/. They are copies of the wavelab  
   necessary files. 
 
@@ -168,11 +168,11 @@ signals with the WTMM method implemented in the FracLab software.
 First of all, you should be sure that the fraclab functions are known 
 in the Matlab environment. For this purpose, you have two solutions:
 
-  i) either you install the library FracLab in your environment; then, 
+  1. either you install the library FracLab in your environment; then, 
   you need to add the path of the directory FracLab to the PATH variable 
   of Matlab, e.g. thanks to the command addpath (See the help of function 
   _procFracWTMM1d_, below).
-  ii) you use the 'stand-alone' files provided in the sub-directory 
+  2. you use the 'stand-alone' files provided in the sub-directory 
   _fraclib/_ of the directory _fraclab/_. 
 
 In Matlab, move to the directory _fraclab/_. Then, in order to perform 
