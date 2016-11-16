@@ -1,0 +1,33 @@
+## Names of the sources and other useful variables
+
+MFMAINSRC=$(DIRMF)/MF_processor.$(SRCEXT)  
+MFMAINOBJ=$(DIRMF)/MF_processor.$(OBJEXT)
+
+
+MSMMAINSRC=$(DIRMF)/msm_processor.$(SRCEXT)
+MSMMAINOBJ=$(DIRMF)/msm_processor.$(OBJEXT)
+
+
+WTMMMAINSRC=$(DIRMF)/wtmm_processor.$(SRCEXT)
+WTMMMAINOBJ=$(DIRMF)/wtmm_processor.$(OBJEXT)
+
+WTMMLIST=$(DIRWTMM)/utils \
+	$(DIRWTMM)/parse_args_wtmm \
+	$(DIRWTMM)/extrema \
+	$(DIRWTMM)/approx_legendre  \
+	$(DIRWTMM)/multifractal_wtmm
+
+WTMMSRCS=$(DIRWTMM)/utils.$(SRCEXT) \
+	$(DIRWTMM)/parse_args_wtmm.$(SRCEXT) \
+	$(DIRWTMM)/extrema.$(SRCEXT) \
+	$(DIRWTMM)/approx_legendre.$(SRCEXT)  \
+	$(DIRWTMM)/multifractal_wtmm.$(SRCEXT)
+
+WTMMLOBJS=$(DIRWTMM)/utils.$(OBJEXT) \
+	$(DIRWTMM)/parse_args_wtmm.$(OBJEXT) \
+	$(DIRWTMM)/extrema.$(OBJEXT) \
+	$(DIRWTMM)/approx_legendre.$(OBJEXT) \
+	$(DIRWTMM)/multifractal_wtmm.$(OBJEXT)
+
+WTMMHEADS=$(DIRWTMM)/const_wtmm.h \
+	$(DIRWTMM)/variables_wtmm.h

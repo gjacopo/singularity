@@ -1,0 +1,334 @@
+##..........................................................................##
+##                                                                          ##
+## Script functions in Lastwave language for computing the multifractal and ##
+## singularity spectra of binary data                                       ##
+##                                                                          ##
+##..........................................................................##
+
+
+if ([var exist DISPLAY] == 0) {
+	DISPLAY = [new &int]
+	DISPLAY = 1
+}
+if ([var exist BINARY] == 0) {
+	BINARY = [new &int]
+	BINARY = 0
+}
+if ([var exist QLIST] == 0) {
+	QLIST=[new &listv]
+	QLIST = {-4. -3.6 -3.2 -3. -2.8 -2.6 -2.4 -2.2 -2. -1.8 -1.6 -1.4 -1.2 -1.1 -1. -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1 0. 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.75 0.8 0.85 0.9 0.95 1. 1.05 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2. 2.3 2.6 3. 3.5 4. 5. 6. 7. 8.}
+}
+
+##
+## Get the WT and the extrema representation of a given signal
+##
+setproc WTransExtCompute {{&signal s} {&num aMin 1.5} {&num nOct 8.} {&num nVoice 10.} \
+			{&string wavelet 'g2'}} \
+			"{{{[<s>] [<aMin>=1.5] [<nOct>=8] [<nVoice>=10] [<wavelet>='g2']} \
+			{WTransExtCompute computes the wavelet transform and the extrema representation of the 1d-signal <s>. Results are returned in a wtrans variable <w>.}}}" {
+
+    global DISPLAY
+
+    w=[new &wtrans]
+
+    # Copy the original signal in a wtrans structure
+    0w = s
+    # copy s 0w
+
+    echo Compute the wavelet transform 
+    ## Compute WT of the cantor using the <worder>th derivative of the gaussian
+    cwtd w aMin nOct nVoice wavelet -e 0 :: >>       
+    ##
+    ## cwtd [<wtrans>=objCur] <aMin> <nOct> <nVoice> [<wavelet>='g2'] [-b <border> = 
+    ##        mir] [-c] [-m] [-e <expo> = -1]
+    ##     Performs the continuous wavelet transform of the signal A[0][0] in <wtrans> 
+    ##     from scale <aMin> using <nOct> octaves, <nVoice> voices per octave, using 
+    ##     the nth derivative of the Gaussian function (<wavelet>=g<n> where n is 
+    ##     in [0..4] are such that g0, -g1, g2, -g3, g4 are the gaussian function 
+    ##     and its successive derivatives) as analyzing wavelet or the morlet wavelet 
+    ##     (which is a complex wavelet).
+    ## note: the commmand cwtd returns a time elapsed in seconds: who cares... that's
+    ## the reason of the redirection :: >>
+
+    echo Compute the extrema representation from the wavelet decomposition
+    ## compute the extrema representation
+    extrema w w.extrep                   
+    # -i -C
+    ##
+    ## extrema [<wtrans>=objCur] [<extrep>=<wtrans>] [-icC] [-e <threshold>]
+    ##     Computes the extrema representation associated to the wavelet transform 
+    ##     <wtrans> and puts it in variable <extrep>. It returns the number of extrema 
+    ##     found. Let us note that this command leads to unstable results at large 
+    ##     sacles (i.e., too many extrema). In order to make the computation stable, 
+    ##     by default, the 'extrema' command chain the extrema (using the 'chain' 
+    ##     command) and delete the extrema (using the 'chaindelete' command) which 
+    ##     have not been chained.
+    ##     -i : The extremum positions are computed without using interpolation and 
+    ##     thus always correspond to a sample of the original signal 
+    ##     -c : Causal effects are taken into account (The extrema are computed only 
+    ##      between the 'firstp' and 'lastp' indexes of each wavelet coefficient signal). 
+    ##     -C : Disable computation of chains and deletion of extrema which do not 
+    ##     belong to the chains. 
+    ##     -e : Sets the <threshold> below which no maxima will be considered.
+   
+    ## If we want to display the extrema representation
+    if (DISPLAY == 1) {disp Extrema w.extrep -pos 700 60 -size 300 300}
+
+    return w	
+}
+
+##
+## Compute the PF and the different multifractal spectra associated to a given WT 
+##
+setproc PFCompute {{&wtrans w} \
+		{&num aMin 1.5} {&num nOct 6.} {&num nVoice 8.} \
+		{&listv qlist {-200.}} \
+		{&num logaMin -200.} {&num logaMax -200.}} \
+		"{{{[<w>] [<aMin>=1.5] [<nOct>=6] [<nVoice>=8.] [<qlist>=QLIST] [<logaMin>=log2(<aMin>)] [<logaMax>=<logaMin>+<nOct>]} \
+		{PFCompute computes the (singularity and multifractal) spectra associated to the WTMM representation stored in the variable <w>. The returned result is a list {<pf> <tauq> <dh>}, where <pf> is a partition function, and <tauq> and <dh> are two signals storing the multifractal and the singularity spectra resp.}}}" {
+
+# note : -200 => absurd value
+
+    global DISPLAY
+
+    pf=[new &PF]
+
+    if (qlist.size == 1 && qlist[0] == -200) {
+	qlist = QLIST
+    }
+
+    echo Compute the partition function on the maxima lines i.e. the WTMM method
+    ## compute the partition functions 
+    pf wtmm pf w.extrep qlist
+    ##
+    ## pf wtmm [<pf>] <extrep> <q-listv|q-signal>
+    ##     Computes the partition functions using the extrema representation. It is 
+    ##     the so-called WTMM method. It returns a new partition function if none 
+    ##     were specified on the command line or <pf> itself.
+    
+    ## if we want to display ALL the computed 't' partition function
+    # echo display tau(q) for all the scales
+    if (DISPLAY==1) { 
+	tauq = [pf get t pf]
+	disp PF {tauq} -pos 381 395 -size 300 300 \
+     	-..fv1 -axisFont 'fixed-10-plain' -yLabel "log2 Z(q,a)" -xLabel "log2 a"
+    }
+
+    if (logaMin == -200.) {logaMin=log2(aMin)}
+    if (logaMax == -200.) {logaMax=logaMin+nOct}
+
+    ## The linear regression of the previous partition function let us access the 
+    ## tau(q) spectrum. 
+    ## compute and display the multifractal exponents
+    tauq = [myTauqSpectrum pf logaMin logaMax]
+    if (DISPLAY == 1) {disp Tau_q tauq -pos 700 395 -size 300 300 \
+	-..fv1 -yLabel "tau(q)" -xLabel "q" -bound -7 9 -7 5 \
+	-..1 -curve 'o' -3 -fg 'blue'}
+
+    ## The linear regression of the previous partition functions let us access the 
+    ## D(h) spectrum. 
+    ## compute and display the singularity spectrum
+    dh = [mySingSpectrum pf logaMin logaMax]
+    if (DISPLAY == 1) {disp D_h dh -pos 60 60 -size 300 300 -x 0 1 -y 0 1.5 \
+	-..fv1 -title "D(h)" 	-..title -font 'fixed-10-plain' \
+	-..1 -curve 'o' 3 -fg 'red'}
+
+    return {pf tauq dh}
+}
+
+
+#
+# 
+#
+setproc AnalyzeSeriesLastWTMM {{&string storedir} {&string savedir} {&string file} {&int N 1} \
+		{&num aMin 1.5} {&num nOct 8.} {&num nVoice 10.} \
+		{&string wavelet 'g2'} \
+		{&listv qlist {-200}} \
+		{&num logaMin -200} {&num logaMax -200}} \
+		"{{{[<storedir>] [<savedir>] [<file>] [<N>=1] [<aMin>=1.5] [<nOct>=8] [<nVoice>=10] [<wavelet>='g2'] [<qlist>=QLIST] [<logaMin>=log2(<aMin>)] [<logaMax>=<logaMin>+<nOct>]} \
+		{AnalyzeSeriesWTMM computes the (singularity and multifractal) spectra associated to the WTMM representation of a serie of <N> signals stored in the text or binary files with generic name <file>-N???.dat in directory <storedir>. The returned result is a list {<pf> <tauq> <dh>}, where <pf> is a partition function, and <tauq> and <dh> are two signals storing the multifractal and the singularity spectra resp. Saves the results in files Tauq_lw_<file> and Dh_lw_<file> of directory <savedir>.}}}" {
+
+# note : -200 => absurd value
+
+    global DISPLAY
+    global BINARY
+    global QLIST
+
+    w=[new &wtrans]
+    pf=[new &PF]
+
+   if (qlist.size == 1 && qlist[0] == -200) {
+	qlist = QLIST
+    }
+    qldisp = [sprintf toto "%.1f" qlist[0]]
+    foreach i 1:qlist.length-1 {qldisp += [sprintf toto " %.1f " qlist[i]]}
+
+    # Loop on the trials
+    foreach i 0:N-1 {
+
+        if (BINARY == 1) {
+ 	    sprintf infile "%s/%s-N%03d.fdat" storedir file i
+	    read 0w infile -r 
+        } else {
+	    sprintf infile "%s/%s-N%03d.txt" storedir file i	
+            read 0w infile          
+	}
+        ##
+        ## read <signalOut> (<filename> | <stream>) [[<xCol>] <yCol>] [-f <firstPoint>] 
+        ##     [-s <sizeToRead>] [-r [('little' | 'big')]] [-b]
+        ##     Reads a signal from a <file> or a <stream>. The file must be in the LW 
+        ##     format (i.e., created with 'write') or in the raw format (option '-r'). 
+        ##     If option '-r' is not set then you can specify the column number for the 
+        ##     x-values and the column number for the y-values (first column is 1). If 
+        ##     none are specified then this command tries to read the first two columns 
+        ##     as x and y or, if there is only one colum, directly the y values. If a 
+        ##     stream is specicified and if option '-r' is not set then, at the end of 
+        ##     the command the stream is positionned at the end of the signal (even if 
+        ##     just a few points are read). The options are 
+        ##       -s : It reads only <sizeToRead> values
+        ##       -r : The data (just the y\'s) are in raw format (binary floats) with 
+        ##        no header. 
+
+	## compute WT of the signal using the <worder>th derivative of the gaussian 
+	cwtd w aMin nOct nVoice wavelet :: >>
+	    
+	## compute the extrema representation: see above
+	extrema w                
+	# w.extrep 
+	
+	## Use the scale adaptive method to chain the maxima lines
+	## Replace all the extrema  ordinates by the max  ordinate on the extrema line 
+	## (finer scale). It takes into account a factor for computing the max value 	
+	chainmax w.extrep 1
+        ##     Replaces the wavelet trasnform value of an extremum by the maximum value 
+        ##     along its chain. This routine allows to perform the scale adaptative 
+	##     version of the WTMM method. The coefficients are first multiply by 
+	##     aMin*(2^(exponent*(o-1+v/nvoice))). This is useful in the case some maxima 
+	##     chains do not decay when going to small scales.
+ 
+	## compute the partition functions 
+	if (i == 0) {
+	    pft = [pf wtmm w.extrep qlist]
+	} else {
+	    pft = [pf add pft [pf wtmm w.extrep qlist]]
+	}
+    }
+    copy pft pf
+
+    printf "\n"
+
+    ## Display ALL the computed 'd' and 'h' partition function
+    ## display h(q) and D(q)
+    if (DISPLAY == 1) {disp Spectrum {[pf get h pf]} {[pf get d pf]} -pos 460 60 -size 300 600 \
+	-..fv1 -title "H(q=$qldisp)" \
+	-..fv2 -title "D(q=$qldisp)" \
+	-..title -font 'fixed-10-plain'}
+
+    if (logaMin == -200.) {logaMin=log2(aMin)}
+    if (logaMax == -200.) {logaMax=logaMin+nOct}
+
+    ## Other methods
+    tauq = [myTauqSpectrum pf logaMin logaMax]
+    if (DISPLAY == 1) {disp Tau_q tauq -pos 700 395 -size 300 300 \
+	-..fv1 -yLabel "tau(q)" -xLabel "q" -bound -7 9 -7 5 \
+	-..1 -curve 'o' -3 -fg 'blue'}
+
+    dh = [mySingSpectrum pf logaMin logaMax]
+    ## Display D(h)
+    if (DISPLAY == 1) {disp D_h dh -pos 60 60 -size 300 300 -x 0 1 -y 0 1.5 \
+	-..fv1 -title "D(h)" 	-..title -font 'fixed-10-plain' \
+	-..1 -curve 'o' 3 -fg 'red'}
+
+    ## write <signalIn> (<filename> | <stream>) [('xy' | 'yx' | 'x' | 'y']) [-h] [-b] 
+    ##          [-r [('little' | 'big')]]
+    ##          Writes a signal into a <file> or a <stream>. It writes the file either 
+    ##          in a raw format (using '-r' option) or (by default) in the LastWave format 
+    ##          with ascii coding (unless '-b' is specified in which case binary codes are used). 
+    ##          In the LastWave format, there are different modes :
+    ##            - 'xy' : First column is X and second is Y (in ascii mode), or the X-values 
+    ##          are stored first then the Y-values (in binary mode).
+    ##           - 'yx' : First column is Y and second is X (in ascii mode), or the Y-values 
+    ##          are stored first then the X-values (in binary mode). 
+    ##            - 'y'  : A single column made of Y 
+    ##            - 'x'  : A single column made of X 
+    ##          By default it uses 'xy' mode for xy-signals and 'y' mode for y-signals. 
+    ##          The options are : 
+    ##            -h : No Header (ONLY in ascii mode).
+    ##            -b : Binary writing (instead of ascii). 
+    ##            -r : The data (just the y\'s) are written in raw format (binary floats) 
+    ##
+    sprintf taufile "%s/Tauq_lw_%s" savedir file
+    write tauq taufile 'xy' -h
+    sprintf dfile "%s/Dh_lw_%s" savedir file
+    write dh dfile 'xy' -h
+
+    return {pf tauq dh}
+}
+
+
+
+##
+## Script functions to automatically get the singularity - graph (h,D(h)) - and 
+## the multifractal - graph (q,tau(q)) - spectra from a PF structure.
+## 
+## Note : mySingSpectrum and myTauqSpectrum are nothing else than the functions 
+## singSpectrum and tauqSpectrum of the file wtmm1d.pkg. They have just been copied
+## here for convenience
+##
+
+##
+## Get the D(h) spectrum from a PF structure.
+##
+setproc mySingSpectrum {{&PF pf} {&float log2aMin} {&float log2aMax}} \
+		"{{{<pf> <log2ScaleMin> <log2ScaleMax>} \
+		{Computes the singularity spectrum D(h) from the partition function structure <pf>. It reads the partition function values for both h(q) and D(q) for all the available q's then performs automatic fits of the partition functions between the log scale values <log2ScaleMin> and <log2ScaleMax> in order to obtain the h(q) and D(q) values. The D(h) function is stored in the (xy) signal <signalOut>. The fits are done automatically between <logScaleMin> and <logScaleMax>.}}}" \
+{
+
+    ## Init the result signal as an XY empty signal
+    result = XY(Zero(pf.qnumber),Zero)
+    
+    ## Init the loop
+    i = 0
+    ## main Loop
+    foreach q pf.qlist {
+	## Get the h(q) value and sets it in result (x array)
+	result.X[i] = [stats fit [pf get h pf q] -x log2aMin log2aMax][0]
+      
+	## Get the D(q) value and sets it in result (y array)
+	result.Y[i] = [stats fit [pf get d pf q] -x log2aMin log2aMax][0]
+	
+	i+=1
+    }
+
+    ## sort according to x-array
+    sort result
+    
+    return result
+}
+
+
+##
+## Get the tau(q) spectrum from a PF structure.
+## 
+setproc myTauqSpectrum {{&PF pf} {&float log2aMin} {&float log2aMax}} \
+		"{{{<pf> <log2ScaleMin> <log2ScaleMax>} \
+		{Computes the tau(q) spectrum from the partition function structure <pf>. It reads the partition function values for tau(q) for all the available q's then performs automatic fits of the partition functions between the log scale values <log2ScaleMin> and <log2ScaleMax> in order to obtain the tau(q) values which are stored in <signalOut>. The fits are done automatically between <log2ScaleMin> and <log2ScaleMax>.}}}" \
+    {
+	
+	result = XY(Zero(pf.qnumber),Zero)
+	
+	## Init the loop
+	i = 0
+	## main Loop
+	foreach q pf.qlist {
+	    ## Set the q      
+	    result.X[i] = q
+	    ## Get the T(q) value and sets it in result (y array)
+	    result.Y[i] = [stats fit [pf get t pf q] -x log2aMin log2aMax][0]
+	    
+	    i+=1
+	}
+	
+	return result
+    }
+
