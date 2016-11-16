@@ -4,12 +4,11 @@ Tools for multifractal analysis of 1D (time-series) and 2D (images) signals
 In the following, we describe the code source files that will enable 
 you to reproduce the experiments of the article
 
- "Numerical methods for the estimation of singularity spectra on sampled 
- data: a comparative study",
- Turiel A., Pérez-Vicente C.J., and Grazzini, J.
- Journal of Computational Physics, 216(1):362-390, 2006.
- DOI: 10.1016/j.jcp.2005.12.004
- URL: http://www.sciencedirect.com/science/article/pii/S0021999105005565
+ Turiel A., Pérez-Vicente C.J., and Grazzini, J. (2006):
+ *Numerical methods for the estimation of singularity spectra on sampled data: a comparative study*,
+ _Journal of Computational Physics_, 216(1):362-390.
+ doi: [10.1016/j.jcp.2005.12.004](http://dx.doi.org/10.1016/j.jcp.2005.12.004),
+ url: http://www.sciencedirect.com/science/article/pii/S0021999105005565.
 
 You need to create your own hierarchy of directories, as follows:
 
