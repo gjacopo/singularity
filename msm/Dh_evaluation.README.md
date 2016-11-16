@@ -4,8 +4,7 @@ Program: Dh_evaluation
 
 	gcc -lm -I<path> -o Dh_evaluation.exe Dh_evaluation.c
 
-where the chain "<path>" must be substituted by the path to reach
-the directory with the libraries required by this program.
+where the chain _<path>_ must be substituted by the path to reach the directory with the libraries required by this program.
 
 ## Required libraries
 
