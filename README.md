@@ -1,10 +1,11 @@
 # multifractal
-_Tools for multifractal analysis an multifractal experiments on 1D (time-series) and 2D (images) signals_
+Tools for multifractal analysis an multifractal experiments on 1D (time-series) and 2D (images) signals
+---
 
 The code source files will enable you to reproduce the experiments of the article:
 
  Turiel A., Pérez-Vicente C.J., and Grazzini J. (2006):
- [Numerical methods for the estimation of singularity spectra on sampled data: a comparative study](http://www.sciencedirect.com/science/article/pii/S0021999105005565),
+ [**Numerical methods for the estimation of singularity spectra on sampled data: a comparative study**](http://www.sciencedirect.com/science/article/pii/S0021999105005565),
  _Journal of Computational Physics_, 216(1):362-390,
  doi: [10.1016/j.jcp.2005.12.004](http://dx.doi.org/10.1016/j.jcp.2005.12.004).
 
