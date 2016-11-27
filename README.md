@@ -1,4 +1,6 @@
-# multifractal
+multifractal
+============
+
 Tools for multifractal analysis an multifractal experiments on 1D (time-series) and 2D (images) signals
 ---
 
