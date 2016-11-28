@@ -6,7 +6,7 @@ Tools for multifractal analysis an multifractal experiments on 1D (time-series) 
 
 **Description**
 
-The code source files will enable you to reproduce the experiments of the article on _numerical methods for the estimation of singularity spectra on sampled data: a comparative study_ listed [below](References).
+The code source files will enable you to reproduce the experiments of the Turiel _et al._'s article on _numerical methods for the estimation of singularity spectra on sampled data: a comparative study_ listed [below](References).
 
 You need to create your own hierarchy of directories, as follows:
 
@@ -141,7 +141,7 @@ We however recommand first to have a look on the `README` of the sub-directory `
 * Turiel A., Pérez-Vicente C.J., and Grazzini J. (2006): [**Numerical methods for the estimation of singularity spectra on sampled data: a comparative study**](http://www.sciencedirect.com/science/article/pii/S0021999105005565), _Journal of Computational Physics_, 216(1):362-390, doi: [10.1016/j.jcp.2005.12.004](http://dx.doi.org/10.1016/j.jcp.2005.12.004).
 * Arneodo A., Audit B., Decoster N., Muzy J.-F. and Vaillant C. (2002): [**Wavelet based multifractal formalism: Application to DNA sequences, satellite images of the cloud structure and stock market data**](http://germain.its.maine.edu/~khalil/courses/MAT500/papers/arneodo_bookfractals_02.pdf), in Bunde A. et al. eds.: _The Science of Disasters: Climate Disruptions, Heart Attacks, and Market Crashes_, Springer Verlag, pp. 26-102. 
 * Lévy Véhel J. and Tricot, C. (2004): [**On various multifractal spectra**](https://hal.inria.fr/inria-00559102/file/jlvctfinal.pdf), _Progress in Probability_, Fractal Geometry and Stochastics III, Birkhauser Verlag, 57, pp.23-42.
-* Abry P., Gonçalves P., Lévy Véhel J. (2002): **Lois d’Echelle, Fractales et Ondelettes**, Hermès Sciences Publications, vols. 1 & 2.  
+* Abry P., Gonçalves P., Lévy Véhel J. (2002): **Lois d’Echelle, Fractales et Ondelettes**, Hermès Sciences Publications.  
 * Arneodo A., Bacry E., Jaffard S. and Muzy J.-F. (1998): [**Singularity spectrum of multifractal functions involving oscillating singularities**](http://link.springer.com/article/10.1007/BF02475987), _Journal of Fourier Analysis & Applications_, 4(2):159-174. doi:[10.1007/BF02475987](https:/doi.org/10.1007/BF02475987).
 * Bacry E., Muzy J.F. & Arneodo A. (1993): [**Singularity spectrum of fractal signals from wavelet analysis: Exact results**](http://link.springer.com/article/10.1007/BF01053588), Journal of Statistical Physics, 70(3):635–674, doi:[10.1007/BF01053588](https:/doi.org/10.1007/BF01053588).
 * Donoho D.L. (1993): [**Nonlinear wavelet methods for recovery of signals, images, and densities from noisy and incomplete data**](https://statistics.stanford.edu/sites/default/files/EFS%20NSF%20437.pdf), in Daubechies I. (ed.): _Different Perspectives on Wavelets_, American Mathematical Society, pp.173-205.
