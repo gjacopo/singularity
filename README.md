@@ -8,6 +8,10 @@ Tools for multifractal analysis an multifractal experiments on 1D (time-series) 
 
 The code source files will enable you to reproduce the experiments of [Turiel _et al._'s article](References) on _numerical methods for the estimation of singularity spectra on sampled data: a comparative study_ referenced below (_mention the source code or the reference doi: [10.1016/j.jcp.2005.12.004](http://dx.doi.org/10.1016/j.jcp.2005.12.004)_).
 
+**Usage**
+
+*settings*
+
 You need to create your own hierarchy of directories, as follows:
 
           EXP -------- benchmark ------ A
