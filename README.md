@@ -142,7 +142,7 @@ We however recommand first to have a look on the `README` of the sub-directory `
 [WaveLab850]: http://statweb.stanford.edu/~wavelab/
 [FracLab]: https://project.inria.fr/fraclab/
 
-**<a name="Reference"></a>References**
+**<a name="References"></a>References**
 
 * Pont A., Turiel A., and Pérez-Vicente C.J. (2009): [**Empirical evidences of a common multifractal signature in economic, biological and physical systems**](https://hal.archives-ouvertes.fr/inria-00438521/document), _Physica A_, 388(10):2025-2035, doi: [10.1016/j.physa.2009.01.041](http://dx.doi.org/10.1016/j.physa.2009.01.041).
 * Turiel A., Pérez-Vicente C.J., and Grazzini J. (2006): [**Numerical methods for the estimation of singularity spectra on sampled data: a comparative study**](http://www.sciencedirect.com/science/article/pii/S0021999105005565), _Journal of Computational Physics_, 216(1):362-390, doi: [10.1016/j.jcp.2005.12.004](http://dx.doi.org/10.1016/j.jcp.2005.12.004).
