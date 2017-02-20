@@ -6,7 +6,7 @@ Numerical methods for multifractal singularity analysis of 1D (time-series) sign
 
 **Description**
 
-The code source files will enable you to reproduce the experiments on multifractal singularity analysis detailed in [Turiel _et al._'s article](References) on *_numerical methods for the estimation of singularity spectra on sampled data: a comparative study_* referenced below (_cite this source code or the reference's doi: [10.1016/j.jcp.2005.12.004](http://dx.doi.org/10.1016/j.jcp.2005.12.004)_).
+The code source files will enable you to reproduce the experiments on multifractal singularity analysis detailed in [Turiel _et al._'s article](#References) on *_numerical methods for the estimation of singularity spectra on sampled data: a comparative study_* referenced below (_cite this source code or the reference's doi: [10.1016/j.jcp.2005.12.004](http://dx.doi.org/10.1016/j.jcp.2005.12.004)_).
 
 See also [`multifractal` project](https://github.com/gjacopo/multifractal) for multifractal analysis of 1D (time-series) and 2D (images) signals.
 
